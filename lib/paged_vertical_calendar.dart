@@ -132,12 +132,10 @@ class _PagedVerticalCalendarState extends State<PagedVerticalCalendar> {
     if (widget.minDate != null) {
       int diffDaysStartDate = widget.minDate!.difference(initDate).inDays;
       hideUp = diffDaysStartDate.isNegative;
-      
       // added by arun to fix upscroll issue
       if(initDate.year==widget.minDate!.year && initDate.month-1<widget.minDate!.month){
         hideUp = false;
       }
-      
     } else {
       hideUp = true;
     }
@@ -167,6 +165,9 @@ class _PagedVerticalCalendarState extends State<PagedVerticalCalendar> {
       _pagingReplyUpController.refresh();
 
       hideUp = widget.minDate?.isBefore(initDate) ?? false;
+      if(initDate.year==widget.minDate!.year && initDate.month-1<widget.minDate!.month){
+        hideUp = false;
+      }
     }
   }
 
